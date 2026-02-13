@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Guessing Game</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #092bd9, #01ff4d);
+      font-family: Arial, sans-serif;
+    }
+
+    .game-card {
+      background: #ede9e9;
+      padding: 30px;
+      width: 320px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #2a5298;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1e3c72;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .attempts {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-card">
+    <h1>🎯 Guess the Number</h1>
+    <p>Pick a number between 1 and 10</p>
+
+    <input type="number" placeholder="Enter your guess">
+    <button>Guess</button>
+
+    <div class="message">Make your first guess!</div>
+    <div class="attempts">Attempts: 0</div>
+  </div>
+
+  <script>
+  const input = document.querySelector("input");
+  const button = document.querySelector("button");
+  const message = document.querySelector(".message");
+  const attemptsText = document.querySelector(".attempts");
+
+  let secretNumber = Math.floor(Math.random() * 10) + 1;
+  let attempts = 0;
+  let gameOver = false;
+
+  button.addEventListener("click", function () {
+    if (gameOver) {
+        // Reset the game
+        secretNumber = Math.floor(Math.random() * 10) + 1;
+        attempts = 0;
+        gameOver = false;
+        button.textContent = "Guess";
+        message.textContent = "Make your first guess!";
+        attemptsText.textContent = "Attempts: 0";
+        input.value = "";
+        input.focus();
+        return; // stop this click from processing further
+    }
+
+    const guess = Number(input.value);
+
+    if (!guess || guess < 1 || guess > 10) {
+      message.textContent = "⛔ Enter a number between 1 and 100";
+      return;
+    }
+
+    attempts++;
+    attemptsText.textContent = "Attempts: " + attempts;
+
+    if (guess > secretNumber) {
+      message.textContent = "📈 Too high!";
+    } 
+    else if (guess < secretNumber) {
+      message.textContent = "📉 Too low!";
+    } 
+    else {
+      message.textContent = "🎉 Correct! You win!";
+      gameOver = true;
+      button.textContent = "play again?";
+    }
+
+    if(attempts >= 10) {
+      message.textContent = "💥 Game Over! Too many attempts!";
+      gameOver = true;
+      button.textContent = "Play again?";
+    }
+
+    input.value = "";
+    input.focus();
+  });
+</script>
+
+
+</body>
+</html>
