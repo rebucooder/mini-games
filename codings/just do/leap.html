@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>leap year cal</title>
+
+  <style>
+    *{
+      margin:0;
+      padding: 0%; 
+    }
+
+    .container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box{
+      background-color: aqua;
+      width: 80%;
+      height: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+    }
+
+    button{
+      width: 100px;
+      background-color: aquamarine;
+      border-radius: 40px;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <h1>put a year you know if its a leapyear or not</h1>
+      <div id="result"></div>
+      <input id="year" type="number">
+      <button onclick="checker()">check</button>
+    </div>
+  </div>
+
+  <script>
+    function checker(){
+      let years = document.getElementById("year").value;
+      let msg = "";
+
+
+      if (years % 400 === 0) {
+        msg = (years + " is a leap year! ✅");
+      } else if (years % 100 === 0) {
+        msg = (years + " is NOT a leap year ❌");
+      } else if (years % 4 === 0) {
+        msg = (years + " is a leap year! ✅");
+      } else {
+        msg = (years + " is NOT a leap year ❌");
+      }
+
+
+      document.getElementById("result").innerText = msg;
+    }
+  </script>
+</body>
+</html>

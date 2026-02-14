@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Hub</title>
+  <style>
+    .game-hub {
+      max-width: 1000px;
+      height: 100%;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .game-list button {
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: #4a90e2;
+      color: white;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .game-list button:hover {
+      background-color: #357ABD;
+    }
+
+    .game-container {
+      margin-top: 20px;
+      border: 2px dashed #ccc;
+      padding: 20px;
+      border-radius: 12px;
+      min-height: 400px;
+      background-color: #f5f5f5;
+    }
+
+    iframe {
+     border-radius: 12px;
+      width: 100%;  /* Keeps it full width of the container */
+      height: 70vh;  /* 60% of the viewport (screen) height */
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-hub">
+    <h1>🎮 Game Hub</h1>
+    <p>Welcome! Click a game to play.</p>
+    <div class="game-list">
+      <button data-game="rps">Rock-Paper-Scissors</button>
+      <button data-game="game2">Random Number Game</button>
+      <button data-game="game3">love calculator</button>
+      <button data-game="game4">match pairs Game</button>
+      <button data-game="game5">leap year checker</button>
+    </div>
+
+    <div class="game-container">
+      <!-- Game iframe will load here -->
+    </div>
+
+    <script>
+      const gameButtons = document.querySelectorAll(".game-list button");
+      const gameContainer = document.querySelector(".game-container");
+
+      gameButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const game = btn.dataset.game;
+          let gameSrc = "";
+          switch (game) {
+            case "rps":
+              gameSrc = "rpc_game.html";
+              break;
+            case "game2":
+              gameSrc = "rnumgame.html";
+              break;
+            case "game3":
+              gameSrc = "pop.html";
+              break;
+            case "game4":
+              gameSrc = "memo.html";
+              break;
+            case "game5":
+              gameSrc = "leap.html";
+              break;  
+          }
+          // Load the game in an iframe
+          gameContainer.innerHTML = `<iframe src="${gameSrc}" width="90%" height="90%" frameborder="0"></iframe>`;
+        });
+      });
+    </script>
+  </div>
+</body>
+</html>
